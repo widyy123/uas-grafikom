@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+</head>
+<body>
+    <a-scene mindar-image="imageTargetSrc: ../assets/targets/all-targets.mind; autoUpdate: true;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+        <a-entity mindar-image-target="targetIndex: 0">
+            <a-gltf-model src="../assets/models/layla.glb" scale="0.5 0.5 0.5"></a-gltf-model>
+        </a-entity>
+        </a-scene>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-assets>
+            <img id="bg" src="../assets/logo.ml/logo.ml.jpg">
+        </a-assets>
+
+        <a-camera id="main-camera" position="0 1.5 3">
+            <a-text id="hero-name" value="LAYLA" position="0.7 -0.4 -1" align="right" width="2" color="#FFCC00"></a-text>
+        </a-camera>
+
+        <a-image src="#bg" position="0 1.5 -5" scale="22 12 1"></a-image>
+
+        <a-entity id="hero-container" position="0 0 0">
+            <a-entity id="wrapper1" position="0 0 0">
+                <a-gltf-model id="hero1" src="../assets/models/layla.glb" scale="1.3 1.3 1.3" animation-mixer></a-gltf-model>
+            </a-entity>
+            <a-entity id="wrapper2" position="0 0 0" visible="false">
+                <a-gltf-model id="hero2" src="../assets/models/rafaela.glb" scale="2 2 2" animation-mixer></a-gltf-model>
+            </a-entity>
+            <a-entity id="wrapper3" position="0 0 0" visible="false">
+                <a-gltf-model id="hero3" src="../assets/models/freya.glb" scale="1 1 1" animation-mixer></a-gltf-model>
+            </a-entity>
+        </a-entity>
+
+        <a-entity light="type: ambient; intensity: 1.5"></a-entity>
+    </a-scene>
+
+    <script>
+        let current = 1;
+        const nameDisplay = document.querySelector('#hero-name');
+
+        // Menggunakan objek Audio JS (Lebih aman agar gambar tidak hilang)
+        const audios = {
+            1: new Audio('../assets/audio/layla sound.mpeg'),
+            2: new Audio('../assets/audio/rafaela sound.mpeg'),
+            3: new Audio('../assets/audio/freya sound.mpeg')
+        };
+
+        // Fungsi untuk ganti lagu
+        function changeAudio(index) {
+            Object.values(audios).forEach(a => { a.pause(); a.currentTime = 0; });
+            audios[index].play().catch(e => console.log("Menunggu interaksi user..."));
+        }
+
+        document.body.addEventListener('click', () => {
+            // Sembunyikan semua
+            document.querySelector('#wrapper1').setAttribute('visible', 'false');
+            document.querySelector('#wrapper2').setAttribute('visible', 'false');
+            document.querySelector('#wrapper3').setAttribute('visible', 'false');
+
+            // Logika ganti hero & lagu
+            if (current === 1) { 
+                document.querySelector('#wrapper2').setAttribute('visible', 'true'); 
+                nameDisplay.setAttribute('value', 'RAFAELA');
+                changeAudio(2);
+                current = 2; 
+            } else if (current === 2) { 
+                document.querySelector('#wrapper3').setAttribute('visible', 'true'); 
+                nameDisplay.setAttribute('value', 'FREYA');
+                changeAudio(3);
+                current = 3; 
+            } else { 
+                document.querySelector('#wrapper1').setAttribute('visible', 'true'); 
+                nameDisplay.setAttribute('value', 'LAYLA');
+                changeAudio(1);
+                current = 1; 
+            }
+        }, { once: false });
+    </script>
+</body>
+</html>

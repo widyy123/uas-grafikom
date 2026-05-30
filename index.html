@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebAR MLBB</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+        }
+
+        .container { max-width: 600px; padding: 20px; }
+
+        h1 { margin-bottom: 10px; color: #ffcc00; text-shadow: 2px 2px 4px #000; }
+        
+        .narasi { 
+            margin-bottom: 30px; 
+            line-height: 1.6; 
+            color: #d1d1d1;
+            font-size: 1.1rem;
+        }
+
+        .btn-container { display: flex; flex-direction: column; gap: 15px; }
+
+        a {
+            text-decoration: none;
+            padding: 15px 40px;
+            background: #ffcc00;
+            color: #000;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        a:hover {
+            transform: scale(1.05);
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="assets/audio/awal.mpeg" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <h1>WebAR MLBB Collection</h1>
+        
+        <p class="narasi">
+            Selamat datang di galeri interaktif pahlawan Mobile Legends! 
+            Rasakan pengalaman melihat hero favoritmu secara nyata di depan mata melalui teknologi Augmented Reality, 
+            atau nikmati tampilan 3D berkualitas tinggi secara instan di layar perangkatmu.
+        </p>
+
+        <div class="btn-container">
+            <a href="frontend/index_ar.html">Mode AR (Butuh Scan)</a>
+            <a href="frontend/index_display.html">Mode Display (Instan)</a>
+        </div>
+    </div>
+
+    <script>
+        // Memutar musik saat user melakukan klik pertama kali di layar
+        document.body.addEventListener('click', function() {
+            var audio = document.getElementById("bg-music");
+            audio.volume = 0.5; // Mengatur volume 50% agar tidak terlalu keras
+            audio.play();
+        }, { once: true });
+    </script>
+
+</body>
+</html>
